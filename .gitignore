@@ -1,0 +1,22 @@
+# Arquivos de configuração e credenciais
+.env
+.env.*
+!.env.example
+
+# Dependências e arquivos gerados
+node_modules/
+dist/
+build/
+
+# Editores
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
