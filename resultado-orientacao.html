@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado da Orientação Profissional — Jornada do Aluno</title>
+  <meta name="description" content="Relatório de afinidades profissionais e sugestões de cursos para exploração vocacional.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+</head>
+<body>
+
+  <!-- Navegação Principal -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="aluno.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação do Resultado">
+        <a href="aluno.html" class="nav-link">Dashboard</a>
+        <a href="simulados.html" class="nav-link">Meus Simulados</a>
+        <a href="plano-estudos.html" class="nav-link">Plano de Estudos</a>
+        <a href="tutora.html" class="nav-link">Tutora Lumi</a>
+        <a href="orientacao.html" class="nav-link active">Orientação Profissional</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost">Sair 🚪</button>
+        <button class="mobile-toggle" aria-label="Menu mobile">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho -->
+    <div class="page-header">
+      <div>
+        <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Relatório de Exploracão</span>
+        <h1 class="page-title">🎯 Suas Áreas de Maior Afinidade</h1>
+        <p class="page-subtitle">Com base nas suas respostas, identificamos campos de atuação com grande aderência aos seus interesses e estilo de estudo.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="btn btn-outline" onclick="salvarFavoritos()">⭐ Salvar Cursos Favoritos</button>
+        <a href="orientacao.html" class="btn btn-ghost">🔄 Refazer Questionário</a>
+      </div>
+    </div>
+
+    <!-- Aviso Importante Lenguagem Respeitosa e Não Determinística -->
+    <div class="alert-box alert-info">
+      <span style="font-size: 1.25rem;">🌱</span>
+      <div>
+        <strong>Ponto de Partida para Reflexão:</strong>
+        <p style="margin-top: 0.25rem; font-size: 0.85rem;">
+          Lembre-se: este resultado <strong>não define de forma rígida o seu futuro</strong>. Você demonstrou afinidade com estas áreas, e elas servem como sugestão para você pesquisar matrizes curriculares, conversar com profissionais e explorar suas opções até o ENEM.
+        </p>
+      </div>
+    </div>
+
+    <!-- As 3 Áreas Principais de Afinidade -->
+    <div style="margin-bottom: 3rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Top 3 Áreas de Maior Aderência</h2>
+      
+      <div class="grid grid-cols-3" id="container-top-areas">
+        <!-- Renderizado dinamicamente pelo JS -->
+      </div>
+    </div>
+
+    <!-- Sugestões de Cursos e Carreiras Detalhadas -->
+    <div class="grid grid-cols-2" style="margin-bottom: 3rem;">
+      
+      <!-- Cursos Recomendados para Pesquisar -->
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom: 1rem; color: var(--primary);">
+          🎓 Cursos Universitários que Podem ser Explorados
+        </h2>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Sugestões de graduação alinhadas ao seu perfil de respostas:
+        </p>
+        
+        <ul style="display: flex; flex-direction: column; gap: 0.85rem;" id="lista-cursos-sugeridos">
+          <!-- Preenchido via JS -->
+        </ul>
+      </div>
+
+      <!-- Questões para Reflexão -->
+      <div class="card" style="background: #FAF5FF; border-color: #E9D5FF;">
+        <h2 class="card-title" style="margin-bottom: 1rem; color: var(--secondary);">
+          🤔 Perguntas para a sua Reflexão Pessoal
+        </h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem; color: var(--text-main);">
+          <li>1. O que mais desperta o seu entusiasmo ao pensar na rotina dessas profissões?</li>
+          <li>2. Você já teve oportunidade de conversar com alguém que trabalha nessas áreas?</li>
+          <li>3. Como os conteúdos que você mais gosta no 3º ano se conectam a essas escolhas?</li>
+          <li>4. Qual peso você dá ao equilíbrio entre realização pessoal e retorno financeiro?</li>
+        </ul>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <a href="plano-estudos.html" class="btn btn-primary" style="width: 100%;">
+            📅 Conectar escolhas ao meu Plano de Estudos ➡️
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Relatório de Orientação Profissional</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tentar carregar resultado do localStorage ou usar padrão
+      let resultado = null;
+      try {
+        resultado = JSON.parse(localStorage.getItem('jornada_orientacao_resultado'));
+      } catch(e) { resultado = null; }
+
+      if (!resultado || !resultado.topAreas || resultado.topAreas.length === 0) {
+        // Padrão Fictício para a aluna Mariana caso acesse diretamente
+        resultado = {
+          topAreas: [
+            { key: "saudeBiologicas", nome: "Saúde e Ciências Biológicas", icone: "🩺", porcentagem: 40 },
+            { key: "tecnologiaEngenharia", nome: "Tecnologia e Engenharias", icone: "💻", porcentagem: 33 },
+            { key: "humanasSociais", nome: "Ciências Humanas e Sociais", icone: "⚖️", porcentagem: 27 }
+          ]
+        };
+      }
+
+      // Descrições e sugestões de cursos por área
+      const detalhesArea = {
+        tecnologiaEngenharia: {
+          desc: "Interesse por inovação, resolução prática de problemas, raciocínio lógico e criação de soluções tecnológicas.",
+          cursos: ["Engenharia de Software", "Ciência da Computação", "Engenharia Biomédica", "Sistemas de Informação"]
+        },
+        saudeBiologicas: {
+          desc: "Foco no cuidado humano, compreensão do corpo, pesquisa científica, prevenção e qualidade de vida.",
+          cursos: ["Medicina", "Biomedicina", "Biotecnologia", "Farmácia", "Enfermagem"]
+        },
+        humanasSociais: {
+          desc: "Afinidade com compreensão da sociedade, cultura, direito, cidadania, educação e mediação de pessoas.",
+          cursos: ["Direito", "Psicologia", " Relações Internacionais", "Sociologia", "Pedagogia"]
+        },
+        comunicacaoCriatividade: {
+          desc: "Expressão artística, narrativa, criação visual, escrita e impacto de conteúdo na sociedade.",
+          cursos: ["Design", "Jornalismo", "Publicidade e Propaganda", "Cinema e Audiovisual"]
+        },
+        gestaoNegocios: {
+          desc: "Organização estratégica, liderança, empreendedorismo, mercado financeiro e gestão de projetos.",
+          cursos: ["Administração", "Economia", "Engenharia de Produção", "Gestão de Startups"]
+        },
+        cienciasExatas: {
+          desc: "Gosto por análise estatística, equações complexas, física teórica e modelagem de dados.",
+          cursos: ["Matemática Aplicada", "Estatística", "Física", "Ciência de Dados"]
+        }
+      };
+
+      // Renderizar Top 3 Cards
+      const containerTop = document.getElementById('container-top-areas');
+      containerTop.innerHTML = resultado.topAreas.map((area, index) => {
+        const info = detalhesArea[area.key] || detalhesArea.saudeBiologicas;
+        return `
+          <div class="card card-hover" style="border-top: 4px solid ${index === 0 ? 'var(--primary)' : (index === 1 ? 'var(--secondary)' : 'var(--teal)')};">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+              <div class="stat-icon ${index === 0 ? 'indigo' : (index === 1 ? 'violet' : 'teal')}">${area.icone}</div>
+              <span class="badge badge-primary">${area.porcentagem}% de Aderência</span>
+            </div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-main);">${index + 1}º ${area.nome}</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              ${info.desc}
+            </p>
+          </div>
+        `;
+      }).join('');
+
+      // Renderizar Cursos Sugeridos
+      const ulCursos = document.getElementById('lista-cursos-sugeridos');
+      let todosCursos = [];
+      resultado.topAreas.forEach(a => {
+        const c = detalhesArea[a.key]?.cursos || [];
+        todosCursos = [...todosCursos, ...c];
+      });
+
+      ulCursos.innerHTML = todosCursos.slice(0, 6).map(curso => `
+        <li style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface-subtle); padding: 0.75rem 1rem; border-radius: 8px;">
+          <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-main);">🎓 ${curso}</span>
+          <span class="badge badge-neutral">Explorar Matriz Curricular</span>
+        </li>
+      `).join('');
+    });
+
+    function salvarFavoritos() {
+      JornadaApp.showToast("⭐ Cursos adicionados aos seus favoritos com sucesso!");
+    }
+  </script>
+</body>
+</html>

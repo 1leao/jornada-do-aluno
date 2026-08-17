@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutora ENEM (Lumi) — Jornada do Aluno</title>
+  <meta name="description" content="Assistente virtual demonstrativa para tirar dúvidas, revisar conteúdos e praticar exercícios do ENEM.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+</head>
+<body>
+
+  <!-- Navegação Principal -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="aluno.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação da Tutora">
+        <a href="aluno.html" class="nav-link">Dashboard</a>
+        <a href="simulados.html" class="nav-link">Meus Simulados</a>
+        <a href="plano-estudos.html" class="nav-link">Plano de Estudos</a>
+        <a href="tutora.html" class="nav-link active">Tutora Lumi</a>
+        <a href="orientacao.html" class="nav-link">Orientação Profissional</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost">Sair 🚪</button>
+        <button class="mobile-toggle" aria-label="Menu mobile">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho da Tutora -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">🤖 Lumi — Tutora ENEM</h1>
+        <p class="page-subtitle">Sua companheira de estudos para esclarecer dúvidas, rever teorias e resolver exercícios.</p>
+      </div>
+
+      <span class="badge badge-neutral" style="font-size: 0.85rem; padding: 0.4rem 0.85rem;">
+        🔒 Protótipo Demonstrativo
+      </span>
+    </div>
+
+    <!-- Aviso Importante de IA e Privacidade -->
+    <div class="alert-box alert-warning">
+      <span style="font-size: 1.25rem;">⚠️</span>
+      <div>
+        <strong>Aviso de Uso Complementar & Privacidade:</strong>
+        <p style="margin-top: 0.25rem; font-size: 0.85rem;">
+          A Tutora Lumi foi projetada para <strong>apoiar seus estudos</strong> e não substitui seus professores ou a orientação pedagógica da escola. Na futura integração com IA real, modelos podem cometer erros. <strong>Nunca insira senhas ou dados pessoais.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Container Principal do Chat -->
+    <div class="chat-container">
+      
+      <!-- Cabeçalho do Chat -->
+      <div class="chat-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="tutor-avatar">L</div>
+          <div>
+            <strong style="display: block; font-size: 1rem; color: var(--text-main);">Lumi — Tutora Virtual ENEM</strong>
+            <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 600;">● Online • Apoio aos Estudos 3º Ano</span>
+          </div>
+        </div>
+
+        <button class="btn btn-sm btn-ghost" onclick="window.location.reload();" title="Reiniciar conversa">
+          🔄 Reiniciar Chat
+        </button>
+      </div>
+
+      <!-- Mensagens (Preenchido pelo tutora-demo.js) -->
+      <div class="chat-messages" id="chat-messages">
+        <!-- Bolhas de Mensagens e Fluxos Interativos -->
+      </div>
+
+      <!-- Atalhos Rápidos para Perguntas -->
+      <div class="chat-quick-actions">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); align-self: center;">Atalhos:</span>
+        <button class="action-pill" onclick="JornadaTutora.atalhoRapido('duvida')">❓ Tirar uma dúvida</button>
+        <button class="action-pill" onclick="JornadaTutora.atalhoRapido('explicar')">💡 Explicar um conteúdo</button>
+        <button class="action-pill" onclick="JornadaTutora.atalhoRapido('questoes')">📝 Criar questões do ENEM</button>
+        <button class="action-pill" onclick="JornadaTutora.atalhoRapido('redacao')">✍️ Apoiar minha Redação</button>
+      </div>
+
+      <!-- Campo de Digitação Visual -->
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Digite sua dúvida ou escolha um dos fluxos acima..." aria-label="Digite sua pergunta para a Tutora Lumi">
+        <button class="btn btn-primary" id="btn-send-chat">
+          Enviar 🚀
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Módulo Tutora Lumi</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/tutora-demo.js"></script>
+</body>
+</html>

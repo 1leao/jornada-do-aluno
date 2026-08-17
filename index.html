@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada do Aluno — Tecnologia que transforma acompanhamento em aprovação</title>
+  <meta name="description" content="Plataforma inteligente de acompanhamento e preparação para o ENEM voltada para estudantes do Ensino Médio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+</head>
+<body>
+
+  <!-- Navegação Superior -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Ir para a página inicial da Jornada do Aluno">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+        <span class="brand-tag">3º Ano ENEM</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="index.html" class="nav-link active">Início</a>
+        <a href="#pilares" class="nav-link">Os 4 Pilares</a>
+        <a href="#beneficios" class="nav-link">Benefícios</a>
+        <a href="#mvp" class="nav-link">Versão MVP</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary">Acessar demonstração 🚀</a>
+        <button class="mobile-toggle" aria-label="Abrir menu de navegação">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Hero Section -->
+    <section style="padding: 3rem 0 4rem; text-align: center; max-width: 900px; margin: 0 auto;">
+      <span class="badge badge-primary" style="font-size: 0.85rem; padding: 0.4rem 1rem; margin-bottom: 1.25rem;">
+        🎓 Plataforma inteligente de preparação para o ENEM
+      </span>
+
+      <h1 style="font-size: 2.75rem; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -0.02em;">
+        Tecnologia que transforma acompanhamento em aprovação.
+      </h1>
+
+      <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">
+        Uma plataforma que une desempenho, planejamento, orientação profissional e apoio aos estudos para acompanhar cada aluno em sua jornada até o ENEM.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="login.html" class="btn btn-lg btn-primary">Acessar demonstração gratuita ➡️</a>
+        <a href="#pilares" class="btn btn-lg btn-outline">Conhecer os 4 pilares</a>
+      </div>
+
+      <!-- Banner Informativo MVP -->
+      <div class="alert-box alert-info" style="margin-top: 3rem; text-align: left;">
+        <span style="font-size: 1.25rem;">ℹ️</span>
+        <div>
+          <strong>Protótipo Exclusivo para o 3º Ano do Ensino Médio:</strong>
+          <p style="margin-top: 0.25rem;">
+            Esta versão demonstrativa foi concebida para a validação de uma proposta de parceria escolar. Utilize dados fictícios pré-carregados para testar os painéis do Aluno, Coordenação e Família.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção dos 4 Pilares -->
+    <section id="pilares" style="padding: 3rem 0;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <h2 style="font-size: 2rem;">Os 4 Pilares da Jornada do Aluno</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Estrutura completa para garantir autonomia, dados pedagógicos e clareza de futuro.</p>
+      </div>
+
+      <div class="grid grid-cols-4">
+        <!-- Pilar 1 -->
+        <div class="card card-hover">
+          <div class="stat-icon violet" style="margin-bottom: 1rem;">🧭</div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Orientação Profissional</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Jornada vocacional reflexiva sem diagnósticos clínicos, ajudando o estudante a explorar afinidades e cursos universitários.
+          </p>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="card card-hover">
+          <div class="stat-icon indigo" style="margin-bottom: 1rem;">📈</div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Simulados e Desempenho</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Análise detalhada por área do conhecimento (Linguagens, Matemática, Humanas, Natureza e Redação) comparada com a meta de nota.
+          </p>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="card card-hover">
+          <div class="stat-icon emerald" style="margin-bottom: 1rem;">📅</div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Plano Personalizado</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Cronograma semanal interativo com priorização automática de conteúdos críticos e controle diário de tarefas concluídas.
+          </p>
+        </div>
+
+        <!-- Pilar 4 -->
+        <div class="card card-hover">
+          <div class="stat-icon teal" style="margin-bottom: 1rem;">🤖</div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Tutora ENEM (Lumi)</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Assistente virtual para tirar dúvidas, propor exercícios guiados e reforçar o aprendizado em parceria com os professores.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Benefícios por Perfil -->
+    <section id="beneficios" style="padding: 3rem 0; background-color: var(--bg-surface); border-radius: var(--radius-xl); border: 1px solid var(--border-color); margin: 2rem 0;">
+      <div style="padding: 2rem;">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <h2 style="font-size: 2rem;">Desenvolvido para Toda a Comunidade Escolar</h2>
+          <p style="color: var(--text-muted); margin-top: 0.5rem;">Solução integrada que conecta estudantes, gestores e responsáveis.</p>
+        </div>
+
+        <div class="grid grid-cols-3">
+          <!-- Benefício Alunos -->
+          <div style="padding: 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👨‍🎓</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Para os Alunos</h3>
+            <ul style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✔️ Clareza sobre onde estão e qual a distância da meta.</li>
+              <li>✔️ Cronograma adaptativo que reduz a ansiedade.</li>
+              <li>✔️ Apoio constante da Lumi para tirar dúvidas pontuais.</li>
+            </ul>
+          </div>
+
+          <!-- Benefício Coordenação -->
+          <div style="padding: 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Para a Coordenação</h3>
+            <ul style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✔️ Visão pedagógica em tempo real por turma e por aluno.</li>
+              <li>✔️ Mapeamento antecipado de alunos que precisam de apoio.</li>
+              <li>✔️ Relatórios de áreas profissionais de maior interesse.</li>
+            </ul>
+          </div>
+
+          <!-- Benefício Famílias -->
+          <div style="padding: 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👨‍👩‍👧</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Para as Famílias</h3>
+            <ul style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✔️ Transparência e acompanhamento do progresso.</li>
+              <li>✔️ Orientações práticas para apoiar a rotina de estudos em casa.</li>
+              <li>✔️ Comunicados escolares centralizados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chamada Final CTA -->
+    <section style="text-align: center; padding: 4rem 1rem;">
+      <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Pronto para explorar o protótipo?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Experimente a navegação completa entre os três perfis da demonstração.</p>
+      <a href="login.html" class="btn btn-lg btn-primary">Iniciar Demonstração 🚀</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> — Tecnologia que transforma acompanhamento em aprovação.</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+      <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">
+        Versão Demonstrativa MVP 0.1.0 • Exclusiva para o 3º Ano do Ensino Médio • Todos os dados são fictícios.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

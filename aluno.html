@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard do Aluno — Jornada do Aluno</title>
+  <meta name="description" content="Painel de acompanhamento individual do estudante para a preparação do ENEM.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navegação Principal Aluno -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="aluno.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação do Aluno">
+        <a href="aluno.html" class="nav-link active">Dashboard</a>
+        <a href="simulados.html" class="nav-link">Meus Simulados</a>
+        <a href="plano-estudos.html" class="nav-link">Plano de Estudos</a>
+        <a href="tutora.html" class="nav-link">Tutora Lumi</a>
+        <a href="orientacao.html" class="nav-link">Orientação Profissional</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div class="tutor-avatar" style="width: 36px; height: 36px; font-size: 0.9rem; background: var(--primary);">MO</div>
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);" id="aluno-nome-header">Mariana</span>
+        </div>
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost" title="Sair do Perfil">Sair 🚪</button>
+        <button class="mobile-toggle" aria-label="Menu mobile">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho do Dashboard com Saudação e Identificação -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" id="saudacao-aluno">Olá, Mariana! 👋</h1>
+        <p class="page-subtitle" id="info-turma">3º Ano A • Ensino Médio • Ano Letivo 2026</p>
+      </div>
+      
+      <!-- Card Mensagem Motivacional -->
+      <div style="background: linear-gradient(135deg, var(--primary-light), var(--secondary-light)); border: 1px solid var(--border-color); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); max-width: 420px;">
+        <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary);">✨ Mensagem de Hoje:</p>
+        <p style="font-size: 0.85rem; color: var(--text-main); margin-top: 0.15rem;">
+          "A constância nos pequenos estudos diários é o que constrói grandes resultados no ENEM."
+        </p>
+      </div>
+    </div>
+
+    <!-- Cards de Métricas Principais (Meta vs Atual) -->
+    <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+      
+      <!-- Meta do Curso -->
+      <div class="card stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <span class="stat-label">Curso & Alvo</span>
+            <div class="stat-value" style="font-size: 1.4rem;" id="curso-alvo">Medicina</div>
+          </div>
+          <div class="stat-icon violet">🎯</div>
+        </div>
+        <div class="stat-meta" id="universidade-alvo">USP / UNICAMP</div>
+      </div>
+
+      <!-- Meta de Nota -->
+      <div class="card stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <span class="stat-label">Meta no ENEM</span>
+            <div class="stat-value" id="meta-nota">780</div>
+          </div>
+          <div class="stat-icon indigo">🏆</div>
+        </div>
+        <div class="stat-meta">Nota de Corte Estimada</div>
+      </div>
+
+      <!-- Média Atual Estimada -->
+      <div class="card stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <span class="stat-label">Média Atual</span>
+            <div class="stat-value" id="media-atual">742</div>
+          </div>
+          <div class="stat-icon emerald">📈</div>
+        </div>
+        <div class="stat-meta trend-up">▲ +18 pts em relação ao 1º Simulado</div>
+      </div>
+
+      <!-- Distância da Meta -->
+      <div class="card stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <span class="stat-label">Distância da Meta</span>
+            <div class="stat-value" style="color: var(--amber);" id="distancia-meta">-38 pts</div>
+          </div>
+          <div class="stat-icon amber">🏁</div>
+        </div>
+        <div class="stat-meta">Faltam poucas questões de acerto!</div>
+      </div>
+
+    </div>
+
+    <!-- Atalhos Rápidos para os Módulos -->
+    <div style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">🚀 Atalhos Rápidos da sua Jornada</h2>
+      <div class="grid grid-cols-4">
+        <a href="simulados.html" class="card card-hover" style="display: flex; align-items: center; gap: 1rem; padding: 1rem;">
+          <div class="stat-icon indigo">📊</div>
+          <div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Meus Simulados</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Ver histórico e evolução</span>
+          </div>
+        </a>
+
+        <a href="plano-estudos.html" class="card card-hover" style="display: flex; align-items: center; gap: 1rem; padding: 1rem;">
+          <div class="stat-icon emerald">📅</div>
+          <div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Plano de Estudos</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted);"><span id="plano-pct-badge">78%</span> concluído esta semana</span>
+          </div>
+        </a>
+
+        <a href="tutora.html" class="card card-hover" style="display: flex; align-items: center; gap: 1rem; padding: 1rem;">
+          <div class="stat-icon teal">🤖</div>
+          <div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Tutora Lumi</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Tirar dúvidas & rever exercícios</span>
+          </div>
+        </a>
+
+        <a href="orientacao.html" class="card card-hover" style="display: flex; align-items: center; gap: 1rem; padding: 1rem;">
+          <div class="stat-icon violet">🧭</div>
+          <div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Orientação Profissional</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Explorar afinidades de curso</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Grid Principal: Gráficos de Desempenho + Notas por Área -->
+    <div class="grid-layout-sidebar" style="margin-bottom: 2rem;">
+      
+      <!-- Coluna Esquerda: Gráfico de Evolução -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📈 Evolução Geral nos Simulados</h2>
+          <span class="badge badge-primary">3 Simulados Realizados</span>
+        </div>
+        <div style="height: 300px; position: relative;">
+          <canvas id="canvasEvolucao"></canvas>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Próximo Simulado & Notas Atuais por Área -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Card Próximo Simulado -->
+        <div class="card" style="background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">Próxima Prova</span>
+            <span style="font-size: 0.85rem; font-weight: 600;">⏳ Faltam 28 dias</span>
+          </div>
+          <h3 style="font-size: 1.2rem; color: white; margin-bottom: 0.25rem;">4º Simulado Diagnóstico ENEM</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9;">Data: 15/09/2026 • Local: Prédio Principal / Virtual</p>
+        </div>
+
+        <!-- Card Notas por Área -->
+        <div class="card" style="flex: 1;">
+          <h2 class="card-title" style="margin-bottom: 1rem;">🎯 Desempenho por Área (Último Simulado)</h2>
+          
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">
+                <span>Redação</span>
+                <strong style="color: var(--amber);">880 pts</strong>
+              </div>
+              <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 88%; background: var(--amber);"></div></div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">
+                <span>Matemática</span>
+                <strong style="color: var(--secondary);">780 pts</strong>
+              </div>
+              <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 78%; background: var(--secondary);"></div></div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">
+                <span>Ciências Humanas</span>
+                <strong style="color: var(--teal);">750 pts</strong>
+              </div>
+              <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 75%; background: var(--teal);"></div></div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">
+                <span>Linguagens e Códigos</span>
+                <strong style="color: var(--primary);">730 pts</strong>
+              </div>
+              <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 73%; background: var(--primary);"></div></div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem;">
+                <span>Ciências da Natureza</span>
+                <strong style="color: var(--emerald);">710 pts</strong>
+              </div>
+              <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 71%; background: var(--emerald);"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Pontos Fortes e Conteúdos em Atenção -->
+    <div class="grid grid-cols-2" style="margin-bottom: 2rem;">
+      
+      <!-- Pontos Fortes -->
+      <div class="card" style="border-left: 4px solid var(--emerald);">
+        <h2 class="card-title" style="color: var(--emerald); margin-bottom: 1rem;">
+          💪 Seus Pontos Fortes no ENEM
+        </h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;" id="lista-pontos-fortes">
+          <!-- Preenchido via JS -->
+        </ul>
+      </div>
+
+      <!-- Conteúdos que Precisam de Atenção -->
+      <div class="card" style="border-left: 4px solid var(--rose);">
+        <h2 class="card-title" style="color: var(--rose); margin-bottom: 1rem;">
+          ⚠️ Conteúdos que Precisam de Atenção
+        </h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;" id="lista-atencao">
+          <!-- Preenchido via JS -->
+        </ul>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Painel do Estudante (Mariana Oliveira)</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const aluno = JORNADA_DADOS.alunoPrincipal;
+      
+      // Preencher Dados
+      document.getElementById('saudacao-aluno').textContent = `Olá, ${aluno.nome.split(' ')[0]}! 👋`;
+      document.getElementById('info-turma').textContent = `${aluno.turma} • ${aluno.nivelEnsino} • Ano Letivo ${JORNADA_DADOS.anoLetivo}`;
+      document.getElementById('curso-alvo').textContent = aluno.cursoInteresse;
+      document.getElementById('universidade-alvo').textContent = aluno.universidadeInteresse;
+      document.getElementById('meta-nota').textContent = aluno.metaNotaEnem;
+      document.getElementById('media-atual').textContent = aluno.mediaAtualEstimada;
+      document.getElementById('distancia-meta').textContent = `${aluno.distanciaMeta} pts`;
+      document.getElementById('plano-pct-badge').textContent = `${aluno.percentualPlanoConcluido}%`;
+
+      // Renderizar Pontos Fortes
+      const ulFortes = document.getElementById('lista-pontos-fortes');
+      ulFortes.innerHTML = aluno.pontosFortes.map(pf => `
+        <li style="display:flex; align-items:flex-start; gap:0.5rem;">
+          <span style="color:var(--emerald);">✓</span>
+          <span>${pf}</span>
+        </li>
+      `).join('');
+
+      // Renderizar Pontos de Atenção
+      const ulAtencao = document.getElementById('lista-atencao');
+      ulAtencao.innerHTML = aluno.conteudosAtencao.map(ca => `
+        <li style="display:flex; align-items:flex-start; gap:0.5rem;">
+          <span style="color:var(--rose);">!</span>
+          <span>${ca}</span>
+        </li>
+      `).join('');
+
+      // Renderizar Gráfico de Evolução
+      JornadaGraficos.renderEvolucaoSimulados('canvasEvolucao', aluno.simuladosHistorico);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Simulados — Jornada do Aluno</title>
+  <meta name="description" content="Histórico detalhado dos simulados, análise de acertos e conteúdos com maior incidência de erros.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navegação Principal -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="aluno.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação dos Simulados">
+        <a href="aluno.html" class="nav-link">Dashboard</a>
+        <a href="simulados.html" class="nav-link active">Meus Simulados</a>
+        <a href="plano-estudos.html" class="nav-link">Plano de Estudos</a>
+        <a href="tutora.html" class="nav-link">Tutora Lumi</a>
+        <a href="orientacao.html" class="nav-link">Orientação Profissional</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost">Sair 🚪</button>
+        <button class="mobile-toggle" aria-label="Menu mobile">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho e Filtro Demonstrativo -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">📊 Análise de Simulados & Desempenho</h1>
+        <p class="page-subtitle">Acompanhe sua trajetória de notas, acertos por área e evolução rumo ao ENEM.</p>
+      </div>
+
+      <!-- Filtro de Simulado -->
+      <div style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+        <label for="filtro-simulado" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Filtrar Prova:</label>
+        <select id="filtro-simulado" style="border: none; background: transparent; font-weight: 600; color: var(--primary); outline: none; cursor: pointer;">
+          <option value="todos">Todos os Simulados (Visão Geral)</option>
+          <option value="SIM-03" selected>3º Simulado ENEM (Julho/2026)</option>
+          <option value="SIM-02">2º Simulado ENEM (Maio/2026)</option>
+          <option value="SIM-01">1º Simulado ENEM (Março/2026)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Cards de Métricas Principais -->
+    <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+      
+      <!-- Média Geral Selecionada -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Média do Simulado</span>
+          <div class="stat-value" id="val-media-simulado">742 pts</div>
+        </div>
+        <div class="stat-meta trend-up">▲ Evolução de +37 pts desde março</div>
+      </div>
+
+      <!-- Questões Certas / Erradas -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Acertos no Simulado</span>
+          <div class="stat-value" style="color: var(--emerald);" id="val-acertos">148 / 180</div>
+        </div>
+        <div class="stat-meta" id="val-pct-acerto">82.2% de aproveitamento geral</div>
+      </div>
+
+      <!-- Comparativo com Meta -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Meta de Nota (Medicina)</span>
+          <div class="stat-value" style="color: var(--secondary);">780 pts</div>
+        </div>
+        <div class="stat-meta" id="val-gap-meta">Distância: -38 pontos</div>
+      </div>
+
+      <!-- Maior Destaque -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Maior Nota da Prova</span>
+          <div class="stat-value" style="color: var(--amber);" id="val-maior-nota">880 pts</div>
+        </div>
+        <div class="stat-meta">Redação (Excelente repertório)</div>
+      </div>
+
+    </div>
+
+    <!-- Layout dos Gráficos em Linha e Barras -->
+    <div class="grid grid-cols-2" style="margin-bottom: 2rem;">
+      
+      <!-- Gráfico 1: Evolução Histórica -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📈 Evolução Total entre Simulados</h2>
+          <span class="badge badge-success">+37 pts no total</span>
+        </div>
+        <div style="height: 280px; position: relative;">
+          <canvas id="canvasSimuladoEvolucao"></canvas>
+        </div>
+      </div>
+
+      <!-- Gráfico 2: Desempenho por Área no Simulado Selecionado -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title" id="titulo-grafico-area">🎯 Notas por Área do Conhecimento</h2>
+          <span class="badge badge-primary">5 Áreas Evaluadas</span>
+        </div>
+        <div style="height: 280px; position: relative;">
+          <canvas id="canvasSimuladoArea"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tabela do Histórico Completo & Análise de Erros -->
+    <div class="grid-layout-sidebar" style="margin-bottom: 2rem;">
+      
+      <!-- Tabela com Histórico de Simulados -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📜 Histórico Completo de Provas</h2>
+          <a href="plano-estudos.html" class="btn btn-sm btn-primary">Acessar Recomendações de Estudo ➡️</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Simulado</th>
+                <th>Data</th>
+                <th>Média</th>
+                <th>Acertos</th>
+                <th>Redação</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-simulados-body">
+              <!-- Preenchido via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Conteúdos com Maior Quantidade de Erros -->
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom: 1rem; color: var(--rose);">
+          ❌ Maiores Oportunidades de Erros
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Assuntos com maior incidência de equívocos nos simulados recentes.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="container-erros">
+          <!-- Preenchido via JS -->
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <a href="tutora.html" class="btn btn-sm btn-outline" style="width: 100%;">
+            🤖 Tirar dúvidas desses temas com a Lumi
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Módulo de Simulados</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const aluno = JORNADA_DADOS.alunoPrincipal;
+      const selectFiltro = document.getElementById('filtro-simulado');
+
+      function atualizarVisualizacao(simuladoId) {
+        let sim = aluno.simuladosHistorico.find(s => s.id === simuladoId);
+        if (!sim) sim = aluno.simuladosHistorico[aluno.simuladosHistorico.length - 1];
+
+        // Atualizar Métricas
+        document.getElementById('val-media-simulado').textContent = `${sim.mediaGeral} pts`;
+        document.getElementById('val-acertos').textContent = `${sim.certas} / ${sim.totalQuestoes}`;
+        document.getElementById('val-pct-acerto').textContent = `${Math.round((sim.certas/sim.totalQuestoes)*100)}% de acertos totais`;
+        document.getElementById('val-gap-meta').textContent = `Distância da Meta: ${sim.mediaGeral - aluno.metaNotaEnem} pts`;
+
+        // Renderizar Gráficos
+        JornadaGraficos.renderEvolucaoSimulados('canvasSimuladoEvolucao', aluno.simuladosHistorico);
+        JornadaGraficos.renderDesempenhoPorArea('canvasSimuladoArea', sim.notas);
+
+        // Renderizar Lista de Conteúdos com Mais Erros
+        const containerErros = document.getElementById('container-erros');
+        containerErros.innerHTML = sim.maioresErros.map(erro => `
+          <div style="background: #FFF1F2; border: 1px solid #FECDD3; padding: 0.75rem; border-radius: 8px;">
+            <strong style="font-size: 0.9rem; color: #9F1239;">⚠️ ${erro}</strong>
+            <span style="display: block; font-size: 0.8rem; color: #BE123C; margin-top: 0.2rem;">Fazer reforço no Plano de Estudos</span>
+          </div>
+        `).join('');
+      }
+
+      // Preencher Tabela de Histórico
+      const tbody = document.getElementById('tabela-simulados-body');
+      tbody.innerHTML = aluno.simuladosHistorico.map(s => `
+        <tr>
+          <td><strong>${s.nome}</strong></td>
+          <td>${s.data}</td>
+          <td><strong style="color:var(--primary);">${s.mediaGeral} pts</strong></td>
+          <td>${s.certas} / ${s.totalQuestoes}</td>
+          <td><strong style="color:var(--amber);">${s.notas.redacao}</strong></td>
+          <td><span class="badge badge-success">Concluído</span></td>
+        </tr>
+      `).join('');
+
+      // Evento do Filtro
+      selectFiltro.addEventListener('change', (e) => {
+        atualizarVisualizacao(e.target.value);
+      });
+
+      // Inicializar com o último simulado
+      atualizarVisualizacao('SIM-03');
+    });
+  </script>
+</body>
+</html>

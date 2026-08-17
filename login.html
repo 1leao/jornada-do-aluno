@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Demonstrativo — Jornada do Aluno</title>
+  <meta name="description" content="Selecione o perfil demonstrativo para explorar a plataforma Jornada do Aluno.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+</head>
+<body>
+
+  <!-- Header Simples -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+      <a href="index.html" class="btn btn-sm btn-ghost">⬅️ Voltar à página inicial</a>
+    </div>
+  </header>
+
+  <main class="main-wrapper" style="display: flex; align-items: center; justify-content: center; min-height: 75vh;">
+    <div style="max-width: 800px; width: 100%;">
+      
+      <!-- Titulo -->
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="badge badge-primary" style="margin-bottom: 0.75rem;">Acesso Sem Senha</span>
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Selecione o Perfil Demonstrativo</h1>
+        <p style="color: var(--text-muted); font-size: 1rem;">
+          Escolha uma das opções abaixo para visualizar a experiência de cada membro da comunidade escolar.
+        </p>
+      </div>
+
+      <!-- Aviso Limpidez e Dados Fictícios -->
+      <div class="alert-box alert-warning" style="margin-bottom: 2rem;">
+        <span style="font-size: 1.25rem;">🔒</span>
+        <div>
+          <strong>Aviso de Demonstração:</strong>
+          <p style="margin-top: 0.25rem;">
+            Esta versão não requer senha ou autenticação real. Todos os perfis utilizam <strong>dados fictícios</strong> pré-carregados para avaliação da proposta pedagógica.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grid de Perfis -->
+      <div class="grid grid-cols-3">
+        
+        <!-- Card Aluno -->
+        <div class="card card-hover" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2rem 1.5rem;">
+          <div>
+            <div class="stat-icon indigo" style="width: 56px; height: 56px; margin: 0 auto 1.25rem; font-size: 1.75rem;">👨‍🎓</div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem;">Painel do Aluno</h2>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Estudante fictícia: <strong>Mariana Oliveira (3º A)</strong>.<br>
+              Acompanhe metas, simulados, plano de estudos, tutora Lumi e orientação profissional.
+            </p>
+          </div>
+          <a href="aluno.html" class="btn btn-primary" style="width: 100%;">Entrar como Aluna ➡️</a>
+        </div>
+
+        <!-- Card Coordenação -->
+        <div class="card card-hover" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2rem 1.5rem;">
+          <div>
+            <div class="stat-icon teal" style="width: 56px; height: 56px; margin: 0 auto 1.25rem; font-size: 1.75rem;">🏛️</div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem;">Painel da Coordenação</h2>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Equipe pedagógica escolar.<br>
+              Visualize comparativos entre o <strong>3º A</strong> e o <strong>3º B</strong>, alertas de estudantes e estatísticas de uso.
+            </p>
+          </div>
+          <a href="coordenacao.html" class="btn btn-outline" style="width: 100%;">Entrar como Coordenação ➡️</a>
+        </div>
+
+        <!-- Card Família -->
+        <div class="card card-hover" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2rem 1.5rem;">
+          <div>
+            <div class="stat-icon emerald" style="width: 56px; height: 56px; margin: 0 auto 1.25rem; font-size: 1.75rem;">👨‍👩‍👧</div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem;">Portal da Família</h2>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Responsáveis pelo estudante.<br>
+              Acompanhe frequências, resumo de evolução, comunicados e orientações práticas de apoio.
+            </p>
+          </div>
+          <a href="familia.html" class="btn btn-outline" style="width: 100%;">Entrar como Família ➡️</a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

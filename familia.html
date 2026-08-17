@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal da Família — Jornada do Aluno</title>
+  <meta name="description" content="Portal de acompanhamento resumido para os responsáveis acompanharem o progresso do estudante no 3º ano do Ensino Médio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navegação da Família -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="familia.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+        <span class="brand-tag" style="background: var(--emerald-light); color: var(--emerald);">Portal da Família</span>
+      </a>
+
+      <div class="nav-actions">
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost">Sair 🚪</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho do Portal -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">👨‍👩‍👧 Acompanhamento de Mariana Oliveira</h1>
+        <p class="page-subtitle">3º Ano A • Ensino Médio • Ano Letivo 2026</p>
+      </div>
+
+      <span class="badge badge-success" style="font-size: 0.9rem; padding: 0.4rem 0.85rem;">
+        ✓ Ritual de Estudo Constante
+      </span>
+    </div>
+
+    <!-- Status Geral de Evolução -->
+    <div class="card" style="margin-bottom: 2rem; background: linear-gradient(135deg, #ECFDF5, #F0FDF4); border-color: #A7F3D0;">
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="font-size: 2rem;">🌟</div>
+        <div>
+          <h2 style="font-size: 1.2rem; color: #065F46; margin-bottom: 0.25rem;">Resumo Geral da Jornada</h2>
+          <p style="font-size: 0.95rem; color: #047857;" id="fam-status-geral">
+            Mariana apresenta excelente engajamento com 96% de frequência escolar e ritmo de estudo constante.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de Métricas da Família -->
+    <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+      
+      <!-- Frequência -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Frequência nas Aulas</span>
+          <div class="stat-value" style="color: var(--emerald);" id="fam-frequencia">96%</div>
+        </div>
+        <div class="stat-meta">Assiduidade exemplar nas aulas</div>
+      </div>
+
+      <!-- Simulados Realizados -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Participação nos Simulados</span>
+          <div class="stat-value" style="color: var(--primary);" id="fam-simulados">3 / 3</div>
+        </div>
+        <div class="stat-meta">100% de presença nas avaliações</div>
+      </div>
+
+      <!-- Metas Cumpridas -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Metas do Mês Cumpridas</span>
+          <div class="stat-value" style="color: var(--secondary);" id="fam-metas">8 de 10</div>
+        </div>
+        <div class="stat-meta">Alto índice de responsabilidade</div>
+      </div>
+
+      <!-- Área em Exploração -->
+      <div class="card stat-card">
+        <div>
+          <span class="stat-label">Curso em Exploração</span>
+          <div class="stat-value" style="font-size: 1.35rem; color: var(--amber);">Medicina</div>
+        </div>
+        <div class="stat-meta">Opção demonstrativa em pesquisa</div>
+      </div>
+
+    </div>
+
+    <!-- ITEM 4.A & 4.B: Evolução nos Simulados + Resumo desde o último simulado -->
+    <div class="grid grid-cols-2" style="margin-bottom: 2rem;">
+      
+      <!-- ITEM 4.A: Gráfico de Evolução Simples -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📈 Evolução da Estudante nos Simulados</h2>
+          <span class="badge badge-success">+37 pts de crescimento</span>
+        </div>
+        <div style="height: 220px; position: relative; margin-bottom: 1rem;">
+          <canvas id="canvasEvolucaoFamilia"></canvas>
+        </div>
+        <div style="background: var(--bg-surface-subtle); padding: 0.85rem 1rem; border-radius: 8px; border-left: 4px solid var(--emerald);">
+          <p style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">
+            "Mariana evoluiu 37 pontos desde o primeiro simulado e 18 pontos em relação ao simulado anterior."
+          </p>
+        </div>
+      </div>
+
+      <!-- ITEM 4.B: Resumo Desde o Último Simulado -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-header">
+            <h2 class="card-title">📊 Resumo Desde o Último Simulado</h2>
+            <span class="badge badge-primary">3º Simulado</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface-subtle); padding: 0.75rem 1rem; border-radius: 8px;">
+              <span style="font-size: 0.875rem; color: var(--text-muted);">Evolução Geral:</span>
+              <strong style="font-size: 0.95rem; color: var(--emerald);">+18 pts no 3º simulado (+37 pts no total)</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface-subtle); padding: 0.75rem 1rem; border-radius: 8px;">
+              <span style="font-size: 0.875rem; color: var(--text-muted);">Área de Maior Crescimento:</span>
+              <strong style="font-size: 0.95rem; color: var(--primary);">Redação (880 pts, +40 pts)</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface-subtle); padding: 0.75rem 1rem; border-radius: 8px;">
+              <span style="font-size: 0.875rem; color: var(--text-muted);">Conteúdo em Atenção:</span>
+              <strong style="font-size: 0.95rem; color: var(--rose);">Genética e Eletrodinâmica</strong>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface-subtle); padding: 0.75rem 1rem; border-radius: 8px;">
+              <span style="font-size: 0.875rem; color: var(--text-muted);">Progresso do Plano Semanal:</span>
+              <strong style="font-size: 0.95rem; color: var(--teal);">78% concluído nesta semana</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ITEM 4.C: Compromissos Importantes & Pontos de Atenção -->
+    <div class="grid grid-cols-3" style="margin-bottom: 2rem;">
+      
+      <!-- Compromissos Importantes -->
+      <div class="card" style="border-top: 4px solid var(--primary);">
+        <h2 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">
+          📌 Compromissos Importantes
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.875rem;">
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.8rem; display: block;">📖 Próxima Atividade:</span>
+            <strong style="color: var(--text-main);">Revisão de Física — Leis de Ohm (Quarta-feira)</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.8rem; display: block;">📝 Próximo Simulado:</span>
+            <strong style="color: var(--text-main);">4º Simulado Diagnóstico ENEM (15/09/2026)</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.8rem; display: block;">🔥 Tarefa Prioritária:</span>
+            <strong style="color: var(--secondary);">Cruzamentos Genéticos (Terça-feira)</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pontos Fortes -->
+      <div class="card" style="border-top: 4px solid var(--emerald);">
+        <h2 class="card-title" style="color: var(--emerald); margin-bottom: 1rem;">
+          💪 Pontos Fortes
+        </h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+          <li>• Excelente nota na Redação (880 pontos)</li>
+          <li>• Ótimo domínio de Matemática e Geometria</li>
+          <li>• Cumprimento constante dos horários de estudo</li>
+        </ul>
+      </div>
+
+      <!-- Pontos de Atenção -->
+      <div class="card" style="border-top: 4px solid var(--rose);">
+        <h2 class="card-title" style="color: var(--rose); margin-bottom: 1rem;">
+          🔍 Pontos de Atenção
+        </h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+          <li>• Reforçar exercícios de Genética e Física</li>
+          <li>• Manter o ritmo de revisões no fim de semana</li>
+          <li>• Garantir pausas de descanso adequadas</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Comunicados Escolares (Com Leitura Persistida) & Orientações -->
+    <div class="grid grid-cols-2" style="margin-bottom: 2rem;">
+      
+      <!-- ITEM 4.D: Comunicados Escolares com Marcar como Lido e localStorage -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title" style="color: var(--text-main);">
+            📢 Comunicados Escolares
+          </h2>
+          <span class="badge badge-neutral" id="badge-comunicados-lidos">0 lidos</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;" id="container-comunicados">
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+
+      <!-- Dicas de Apoio para a Família -->
+      <div class="card" style="background: #F8FAFC;">
+        <h2 class="card-title" style="margin-bottom: 1rem; color: var(--teal);">
+          💡 Orientações de Apoio para a Família
+        </h2>
+
+        <ul style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem; color: var(--text-main);" id="container-dicas-familia">
+          <!-- Preenchido via JS -->
+        </ul>
+
+        <div class="alert-box alert-info" style="margin-top: 1.5rem; margin-bottom: 0;">
+          <span style="font-size: 1.1rem;">ℹ️</span>
+          <span style="font-size: 0.8rem;">
+            <strong>Nota Vocacional:</strong> O curso ou área de interesse indicado neste portal representa uma possibilidade em exploração pelo estudante e não vincula uma decisão obrigatória.
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Portal de Acompanhamento da Família</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fam = JORNADA_DADOS.familiaData;
+
+      document.getElementById('fam-status-geral').textContent = fam.statusGeral;
+      document.getElementById('fam-frequencia').textContent = fam.frequenciaAulas;
+      document.getElementById('fam-simulados').textContent = fam.simuladosRealizados;
+      document.getElementById('fam-metas').textContent = fam.metaCumpridaCount;
+
+      // ITEM 4.A: Renderizar Gráfico de Evolução da Mariana para a Família
+      JornadaGraficos.renderEvolucaoFamilia('canvasEvolucaoFamilia', fam.simuladosEvolucaoMariana);
+
+      // ITEM 4.D: Lógica de Marcar Comunicado como Lido com Persistência no localStorage
+      let comunicadosLidos = [];
+      try {
+        comunicadosLidos = JSON.parse(localStorage.getItem('jornada_comunicados_lidos') || '[]');
+      } catch(e) { comunicadosLidos = []; }
+
+      window.toggleComunicadoLido = function(id) {
+        let lidos = [];
+        try {
+          lidos = JSON.parse(localStorage.getItem('jornada_comunicados_lidos') || '[]');
+        } catch(e) { lidos = []; }
+
+        const index = lidos.indexOf(id);
+        if (index > -1) {
+          lidos.splice(index, 1); // Desfazer marcação
+          JornadaApp.showToast("Comunicado marcado como não lido.");
+        } else {
+          lidos.push(id); // Marcar como lido
+          JornadaApp.showToast("✅ Comunicado marcado como lido!");
+        }
+
+        localStorage.setItem('jornada_comunicados_lidos', JSON.stringify(lidos));
+        renderizarComunicados();
+      };
+
+      function renderizarComunicados() {
+        let lidos = [];
+        try {
+          lidos = JSON.parse(localStorage.getItem('jornada_comunicados_lidos') || '[]');
+        } catch(e) { lidos = []; }
+
+        document.getElementById('badge-comunicados-lidos').textContent = `${lidos.length} de ${fam.comunicadosEscolares.length} lidos`;
+
+        const containerCom = document.getElementById('container-comunicados');
+        containerCom.innerHTML = fam.comunicadosEscolares.map(c => {
+          const isLido = lidos.includes(c.id);
+          return `
+            <div class="comunicado-box ${isLido ? 'lido' : ''}" style="background: var(--bg-surface-subtle); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="font-size: 0.95rem; color: var(--text-main);">${c.titulo}</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">${c.data}</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-main); line-height: 1.5; margin-bottom: 0.85rem;">${c.conteudo}</p>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                ${isLido 
+                  ? '<span class="badge badge-success">✓ Comunicado lido</span>' 
+                  : '<span class="badge badge-neutral">Pendente de leitura</span>'}
+                
+                <button class="btn btn-sm ${isLido ? 'btn-ghost' : 'btn-outline'}" onclick="toggleComunicadoLido('${c.id}')" aria-label="${isLido ? 'Desfazer marcação de lido' : 'Marcar como lido'}">
+                  ${isLido ? '↩️ Desfazer marcação' : '✓ Marcar como lido'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Renderizar Dicas para a Família
+      const containerDicas = document.getElementById('container-dicas-familia');
+      containerDicas.innerHTML = fam.dicasParaFamília.map(dica => `
+        <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+          <span>🌱</span>
+          <span>${dica}</span>
+        </li>
+      `).join('');
+
+      renderizarComunicados();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada de Orientação Profissional — Jornada do Aluno</title>
+  <meta name="description" content="Questionário reflexivo de orientação profissional para estudantes do Ensino Médio explorarem afinidades de carreira.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+
+</head>
+<body>
+
+  <!-- Navegação Principal -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="aluno.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <span>Jornada do Aluno</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação da Orientação">
+        <a href="aluno.html" class="nav-link">Dashboard</a>
+        <a href="simulados.html" class="nav-link">Meus Simulados</a>
+        <a href="plano-estudos.html" class="nav-link">Plano de Estudos</a>
+        <a href="tutora.html" class="nav-link">Tutora Lumi</a>
+        <a href="orientacao.html" class="nav-link active">Orientação Profissional</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button onclick="JornadaApp.fazerLogout()" class="btn btn-sm btn-ghost">Sair 🚪</button>
+        <button class="mobile-toggle" aria-label="Menu mobile">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Cabeçalho -->
+    <div class="page-header" style="text-align: center; flex-direction: column; align-items: center;">
+      <span class="badge badge-primary" style="margin-bottom: 0.5rem;">🧭 Recurso Reflexivo</span>
+      <h1 class="page-title">Jornada de Orientação Profissional</h1>
+      <p class="page-subtitle" style="max-width: 680px;">
+        Responda às 15 perguntas sobre suas preferências, valores e estilo de estudo para descobrir áreas de maior afinidade e caminhos acadêmicos para explorar.
+      </p>
+    </div>
+
+    <!-- Aviso Importante Sem Rótulos Clínicos -->
+    <div class="alert-box alert-info" style="max-width: 760px; margin: 0 auto 2rem;">
+      <span style="font-size: 1.25rem;">ℹ️</span>
+      <div>
+        <strong>Aviso Pedagógico Importante:</strong>
+        <p style="margin-top: 0.25rem; font-size: 0.85rem;">
+          Este questionário é uma ferramenta de <strong>reflexão e autoexploração pedagógica</strong>. Ele não constitui teste psicológico ou avaliação diagnóstica e não "determina" qual profissão você deve seguir. O objetivo é servir como ponto de partida para conversas com sua orientação educacional e família.
+        </p>
+      </div>
+    </div>
+
+    <!-- Container Dinâmico do Wizard (Renderizado via orientacao.js) -->
+    <div id="wizard-container">
+      <!-- As 15 perguntas serão inseridas aqui em etapas -->
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>Jornada do Aluno</strong> • Módulo de Orientação Profissional</p>
+      <p>Projeto desenvolvido por <strong>Gabriela Leão</strong></p>
+    </div>
+  </footer>
+
+  <script src="js/dados-demo.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/orientacao.js"></script>
+</body>
+</html>
